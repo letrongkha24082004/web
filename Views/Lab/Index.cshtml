@@ -1,0 +1,15 @@
+﻿@model List<BlogManager.Models.Post>
+
+<h2>Danh sách bài viết</h2>
+
+<p>Số đã xuất bản: @ViewBag.SoDaXuatBan</p>
+
+<ul>
+@foreach (var p in Model)
+{
+    <li>
+        <strong>@p.Title</strong> — @p.PublishedAt.ToString("dd/MM/yyyy")
+        <div>@p.Content</div>
+    </li>
+}
+</ul>
