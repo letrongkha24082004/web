@@ -1,0 +1,57 @@
+@model List<BlogManager_LeTrongKha.Models.Post>
+@{
+    ViewData["Title"] = "Thử nghiệm C# và LINQ";
+    var baiDaXuatBan = (List<BlogManager_LeTrongKha.Models.Post>)ViewBag.BaiDaXuatBan;
+    var baiNhieuLuotXemNhat = (BlogManager_LeTrongKha.Models.Post)ViewBag.BaiNhieuLuotXemNhat;
+}
+
+<h1>Thử nghiệm C# và LINQ</h1>
+
+<div class="alert alert-primary mt-4">
+    <strong>Số bài đã xuất bản:</strong> @ViewBag.SoDaXuatBan
+</div>
+
+<h2 class="h4 mt-4">Bài đã xuất bản — lượt xem giảm dần</h2>
+<div class="table-responsive">
+    <table class="table table-striped align-middle">
+        <thead>
+            <tr>
+                <th>Tiêu đề</th>
+                <th>Tác giả</th>
+                <th>Lượt xem</th>
+                <th>Nhãn</th>
+            </tr>
+        </thead>
+        <tbody>
+        @foreach (var post in baiDaXuatBan)
+        {
+            <tr>
+                <td>@post.Title</td>
+                <td>@post.Author</td>
+                <td>@post.ViewCount</td>
+                <td><span class="badge text-bg-success">@post.NhanPhoBien()</span></td>
+            </tr>
+        }
+        </tbody>
+    </table>
+</div>
+
+<div class="row g-3 mt-3">
+    <div class="col-md-6">
+        <div class="card h-100">
+            <div class="card-body">
+                <h2 class="h5">Tổng lượt xem</h2>
+                <p class="display-6 mb-0">@ViewBag.TongLuotXem</p>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="card h-100">
+            <div class="card-body">
+                <h2 class="h5">Bài có lượt xem cao nhất</h2>
+                <p class="mb-1"><strong>@baiNhieuLuotXemNhat.Title</strong></p>
+                <p class="mb-0">@baiNhieuLuotXemNhat.ViewCount lượt xem</p>
+            </div>
+        </div>
+    </div>
+</div>

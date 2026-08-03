@@ -1,0 +1,16 @@
+namespace BlogManager_LeTrongKha.Models;
+
+public class Post
+{
+    public int Id { get; set; }
+    public string Title { get; set; } = string.Empty;
+    public string Content { get; set; } = string.Empty;
+    public string Author { get; set; } = string.Empty;
+    public DateTime PublishedAt { get; set; } = DateTime.Now;
+    public bool IsPublished { get; set; }
+    public int ViewCount { get; set; }
+
+    public string MoTaNgan() => $"{Title} ({PublishedAt:dd/MM/yyyy})";
+
+    public string NhanPhoBien() => ViewCount >= 100 ? "Phổ biến" : "Thường";
+}
