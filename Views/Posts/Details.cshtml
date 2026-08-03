@@ -1,0 +1,17 @@
+@model BlogManager_LeTrongKha.Models.Post
+@{
+    ViewData["Title"] = "Chi tiết bài viết";
+}
+
+<article>
+    <a asp-action="Index" class="btn btn-link px-0 mb-3">← Quay lại danh sách</a>
+    <h1>@Model.Title</h1>
+    <p class="text-muted">
+        @Model.Author · @Model.PublishedAt.ToString("dd/MM/yyyy") · @Model.ViewCount lượt xem
+    </p>
+    <hr />
+    <p class="lead">@Model.Content</p>
+    <span class="badge @(Model.IsPublished ? "text-bg-success" : "text-bg-secondary")">
+        @(Model.IsPublished ? "Đã xuất bản" : "Nháp")
+    </span>
+</article>

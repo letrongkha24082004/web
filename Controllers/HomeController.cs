@@ -23,6 +23,18 @@ public class HomeController : Controller
         return View();
     }
 
+    public IActionResult About()
+    {
+        ViewData["Title"] = "Giới thiệu";
+        return View();
+    }
+
+    public IActionResult Contact()
+    {
+        ViewData["Title"] = "Liên hệ";
+        return View();
+    }
+
     [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
     public IActionResult Error()
     {
