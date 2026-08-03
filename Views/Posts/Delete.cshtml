@@ -1,0 +1,22 @@
+@model BlogManager_LeTrongKha.Models.Post
+@{
+    ViewData["Title"] = "Xóa bài viết";
+}
+
+<h1>Xóa bài viết</h1>
+<div class="alert alert-warning mt-4">
+    Bạn có chắc chắn muốn xóa bài viết <strong>@Model.Title</strong> không?
+</div>
+
+<dl class="row">
+    <dt class="col-sm-3">Tác giả</dt>
+    <dd class="col-sm-9">@Model.Author</dd>
+    <dt class="col-sm-3">Ngày đăng</dt>
+    <dd class="col-sm-9">@Model.PublishedAt.ToString("dd/MM/yyyy")</dd>
+</dl>
+
+<form asp-action="Delete" method="post">
+    <input asp-for="Id" type="hidden" />
+    <button type="submit" class="btn btn-danger">Xác nhận xóa</button>
+    <a asp-action="Details" asp-route-id="@Model.Id" class="btn btn-outline-secondary">Hủy</a>
+</form>

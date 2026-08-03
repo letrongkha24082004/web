@@ -1,0 +1,54 @@
+@model BlogManager_LeTrongKha.Models.Post
+@{
+    ViewData["Title"] = "Sửa bài viết";
+}
+
+<h1>Sửa bài viết</h1>
+
+<form asp-action="Edit" asp-route-id="@Model.Id" method="post" class="mt-4" style="max-width: 48rem;">
+    <input asp-for="Id" type="hidden" />
+    <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
+
+    <div class="mb-3">
+        <label asp-for="Title" class="form-label"></label>
+        <input asp-for="Title" class="form-control" />
+        <span asp-validation-for="Title" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="Content" class="form-label"></label>
+        <textarea asp-for="Content" class="form-control" rows="7"></textarea>
+        <span asp-validation-for="Content" class="text-danger"></span>
+    </div>
+
+    <div class="row">
+        <div class="col-md-6 mb-3">
+            <label asp-for="Author" class="form-label"></label>
+            <input asp-for="Author" class="form-control" />
+            <span asp-validation-for="Author" class="text-danger"></span>
+        </div>
+        <div class="col-md-6 mb-3">
+            <label asp-for="PublishedAt" class="form-label"></label>
+            <input asp-for="PublishedAt" class="form-control" />
+            <span asp-validation-for="PublishedAt" class="text-danger"></span>
+        </div>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="ViewCount" class="form-label"></label>
+        <input asp-for="ViewCount" class="form-control" />
+        <span asp-validation-for="ViewCount" class="text-danger"></span>
+    </div>
+
+    <div class="form-check mb-4">
+        <input asp-for="IsPublished" class="form-check-input" />
+        <label asp-for="IsPublished" class="form-check-label"></label>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Lưu thay đổi</button>
+    <a asp-action="Details" asp-route-id="@Model.Id" class="btn btn-outline-secondary">Hủy</a>
+</form>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

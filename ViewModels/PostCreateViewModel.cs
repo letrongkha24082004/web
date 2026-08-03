@@ -1,11 +1,9 @@
 using System.ComponentModel.DataAnnotations;
 
-namespace BlogManager_LeTrongKha.Models;
+namespace BlogManager_LeTrongKha.ViewModels;
 
-public class Post
+public class PostCreateViewModel
 {
-    public int Id { get; set; }
-
     [Display(Name = "Tiêu đề")]
     [Required(ErrorMessage = "Tiêu đề là bắt buộc.")]
     [StringLength(200, MinimumLength = 3,
@@ -21,7 +19,7 @@ public class Post
     [Display(Name = "Tác giả")]
     [Required(ErrorMessage = "Tác giả là bắt buộc.")]
     [StringLength(100, ErrorMessage = "Tên tác giả không được vượt quá 100 ký tự.")]
-    public string Author { get; set; } = string.Empty;
+    public string Author { get; set; } = "Lê Trọng Kha";
 
     [Display(Name = "Ngày đăng")]
     [DataType(DataType.Date)]
@@ -33,8 +31,4 @@ public class Post
     [Display(Name = "Lượt xem")]
     [Range(0, int.MaxValue, ErrorMessage = "Lượt xem không được là số âm.")]
     public int ViewCount { get; set; }
-
-    public string MoTaNgan() => $"{Title} ({PublishedAt:dd/MM/yyyy})";
-
-    public string NhanPhoBien() => ViewCount >= 100 ? "Phổ biến" : "Thường";
 }
