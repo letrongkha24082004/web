@@ -21,6 +21,22 @@ body {
   margin-bottom: 60px;
 }
 
+.list-search-form {
+  width: min(100%, 34rem);
+}
+
+@media (min-width: 768px) {
+  .list-search-form {
+    width: 31rem;
+  }
+}
+
+@media (min-width: 1200px) {
+  .posts-toolbar .list-search-form {
+    width: 42rem;
+  }
+}
+
 .form-floating > .form-control-plaintext::placeholder, .form-floating > .form-control::placeholder {
   color: var(--bs-secondary-color);
   text-align: end;

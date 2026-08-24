@@ -1,0 +1,38 @@
+@model Category
+@{
+    ViewData["Title"] = "Xóa danh mục";
+}
+
+<div class="card border-danger">
+    <div class="card-header text-bg-danger">
+        <h1 class="h4 mb-0">
+            <i class="bi bi-exclamation-triangle me-2" aria-hidden="true"></i>Xác nhận xóa danh mục
+        </h1>
+    </div>
+    <div class="card-body">
+        <p>Bạn có chắc muốn xóa danh mục <strong>@Model.Name</strong>?</p>
+
+        @if (Model.Posts.Count > 0)
+        {
+            <div class="alert alert-warning mb-0" role="alert">
+                <i class="bi bi-info-circle me-1" aria-hidden="true"></i>
+                <strong>@Model.Posts.Count</strong> bài viết thuộc danh mục này sẽ được giữ lại và chuyển thành
+                <strong>Chưa phân loại</strong>.
+            </div>
+        }
+        else
+        {
+            <p class="text-muted mb-0">Danh mục này chưa có bài viết.</p>
+        }
+    </div>
+    <div class="card-footer">
+        <form asp-action="Delete" asp-route-id="@Model.Id" method="post">
+            <button type="submit" class="btn btn-danger">
+                <i class="bi bi-trash me-1" aria-hidden="true"></i>Xóa
+            </button>
+            <a asp-action="Index" class="btn btn-secondary">
+                <i class="bi bi-x-circle me-1" aria-hidden="true"></i>Hủy
+            </a>
+        </form>
+    </div>
+</div>

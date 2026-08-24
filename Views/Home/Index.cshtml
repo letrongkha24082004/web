@@ -1,8 +1,26 @@
-﻿@{
-    ViewData["Title"] = "Home Page";
+@{
+    ViewData["Title"] = "Trang chủ";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+<div class="p-5 mb-4 bg-body-tertiary rounded-3 border">
+    <div class="container-fluid py-3">
+        <h1 class="display-5 fw-bold">BlogManager</h1>
+        <p class="col-lg-8 fs-5">Quản lý bài viết bằng ASP.NET Core MVC, Entity Framework Core, SQLite và Identity.</p>
+        <a asp-controller="Posts" asp-action="Index" class="btn btn-primary btn-lg">Khám phá bài viết</a>
+    </div>
+</div>
+
+<div class="row g-4">
+    <div class="col-md-4">
+        <h2 class="h4">Quản lý nội dung</h2>
+        <p>Tạo, xem, chỉnh sửa và phân loại bài viết với validation đầy đủ.</p>
+    </div>
+    <div class="col-md-4">
+        <h2 class="h4">Tìm kiếm thông minh</h2>
+        <p>Tìm theo tiêu đề, lọc theo thẻ, sắp xếp và phân trang bằng LINQ.</p>
+    </div>
+    <div class="col-md-4">
+        <h2 class="h4">Bảo mật và API</h2>
+        <p>Đăng nhập, phân quyền theo vai trò và sử dụng RESTful API qua Swagger.</p>
+    </div>
 </div>

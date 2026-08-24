@@ -1,0 +1,20 @@
+@model Tag
+@{
+    ViewData["Title"] = "Xóa thẻ";
+}
+
+<div class="card border-danger">
+    <div class="card-header text-bg-danger">
+        <h1 class="h4 mb-0">Xác nhận xóa thẻ</h1>
+    </div>
+    <div class="card-body">
+        <p>Bạn có chắc muốn xóa thẻ <strong>#@Model.Name</strong>?</p>
+        <p class="text-muted mb-0">Liên kết khỏi <strong>@Model.Posts.Count</strong> bài viết sẽ bị xóa; bài viết vẫn được giữ lại.</p>
+    </div>
+    <div class="card-footer">
+        <form asp-action="Delete" asp-route-id="@Model.Id" method="post">
+            <button type="submit" class="btn btn-danger">Xóa</button>
+            <a asp-action="Index" class="btn btn-secondary">Hủy</a>
+        </form>
+    </div>
+</div>

@@ -1,0 +1,51 @@
+@model PostFormViewModel
+
+<div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+<div class="mb-3">
+    <label asp-for="Title" class="form-label"></label>
+    <input asp-for="Title" class="form-control" />
+    <span asp-validation-for="Title" class="text-danger"></span>
+</div>
+
+<div class="mb-3">
+    <label asp-for="Author" class="form-label"></label>
+    <input asp-for="Author" class="form-control" />
+    <span asp-validation-for="Author" class="text-danger"></span>
+</div>
+
+<div class="mb-3">
+    <label asp-for="PublishedAt" class="form-label"></label>
+    <input asp-for="PublishedAt" class="form-control" />
+    <span asp-validation-for="PublishedAt" class="text-danger"></span>
+</div>
+
+<div class="mb-3">
+    <label asp-for="CategoryId" class="form-label"></label>
+    <select asp-for="CategoryId" asp-items="Model.CategoryOptions" class="form-select">
+        <option value="">-- Chưa phân loại --</option>
+    </select>
+    <span asp-validation-for="CategoryId" class="text-danger"></span>
+    <div class="form-text">
+        Chưa có danh mục phù hợp?
+        <a asp-controller="Categories" asp-action="Create" target="_blank">Tạo danh mục mới</a>.
+    </div>
+</div>
+
+<div class="mb-3">
+    <label asp-for="SelectedTagIds" class="form-label"></label>
+    <select asp-for="SelectedTagIds" asp-items="Model.TagOptions" class="form-select" multiple size="5"></select>
+    <span asp-validation-for="SelectedTagIds" class="text-danger"></span>
+    <div class="form-text">Giữ Ctrl (Windows) hoặc Command (macOS) để chọn nhiều thẻ.</div>
+</div>
+
+<div class="mb-3">
+    <label asp-for="Content" class="form-label"></label>
+    <textarea asp-for="Content" class="form-control" rows="10"></textarea>
+    <span asp-validation-for="Content" class="text-danger"></span>
+</div>
+
+<div class="form-check mb-3">
+    <input asp-for="IsPublished" class="form-check-input" />
+    <label asp-for="IsPublished" class="form-check-label"></label>
+</div>

@@ -1,0 +1,45 @@
+@model TagIndexViewModel
+@{
+    ViewData["Title"] = "Thẻ";
+}
+
+<div class="d-flex flex-column flex-lg-row align-items-lg-center gap-3 mb-3">
+    <h1 class="h2 mb-0"><i class="bi bi-tag me-2" aria-hidden="true"></i>Thẻ bài viết</h1>
+    <form asp-action="Index" method="get" class="list-search-form ms-lg-auto" role="search">
+        <div class="input-group">
+            <input type="search" name="searchTerm" value="@Model.SearchTerm" class="form-control" placeholder="Tìm tên thẻ" />
+            <button class="btn btn-outline-primary" type="submit">Tìm kiếm</button>
+        </div>
+    </form>
+    @if (User.IsInRole(RoleNames.Admin))
+    {
+        <a asp-action="Create" class="btn btn-primary">Tạo thẻ</a>
+    }
+</div>
+
+@if (TempData["SuccessMessage"] is string successMessage)
+{
+    <div class="alert alert-success">@successMessage</div>
+}
+
+<div class="table-responsive">
+    <table class="table table-striped table-hover align-middle">
+        <thead><tr><th>Tên thẻ</th><th>Số bài viết</th><th class="text-end">Hành động</th></tr></thead>
+        <tbody>
+        @foreach (var tag in Model.Tags)
+        {
+            <tr>
+                <td><a asp-controller="Posts" asp-action="Index" asp-route-tagId="@tag.Id" class="text-decoration-none">#@tag.Name</a></td>
+                <td>@tag.Posts.Count</td>
+                <td class="text-end">
+                    @if (User.IsInRole(RoleNames.Admin))
+                    {
+                        <a asp-action="Edit" asp-route-id="@tag.Id" class="btn btn-sm btn-outline-secondary">Sửa</a>
+                        <a asp-action="Delete" asp-route-id="@tag.Id" class="btn btn-sm btn-outline-danger">Xóa</a>
+                    }
+                </td>
+            </tr>
+        }
+        </tbody>
+    </table>
+</div>

@@ -1,0 +1,58 @@
+@model Post
+@{
+    ViewData["Title"] = Model.Title;
+}
+
+<div class="container mt-4">
+    <div class="card">
+        <div class="card-header">
+            <h2>@Model.Title</h2>
+        </div>
+        <div class="card-body">
+            <p><strong>Tác giả:</strong> @Model.Author</p>
+            <p>
+                <strong>Danh mục:</strong>
+                @if (Model.Category is null)
+                {
+                    <span class="text-muted">Chưa phân loại</span>
+                }
+                else
+                {
+                    <span><i class="bi bi-tag me-1" aria-hidden="true"></i>@Model.Category.Name</span>
+                }
+            </p>
+            <p><strong>Ngày đăng:</strong> @Model.PublishedAt.ToString("dd/MM/yyyy")</p>
+            <p><strong>Trạng thái:</strong> @(Model.IsPublished ? "Đã xuất bản" : "Bản nháp")</p>
+            <p><strong>Lượt xem:</strong> @Model.ViewCount</p>
+            <p>
+                <strong>Thẻ:</strong>
+                @if (Model.Tags.Count == 0)
+                {
+                    <span class="text-muted">Chưa có thẻ</span>
+                }
+                else
+                {
+                    @foreach (var tag in Model.Tags.OrderBy(tag => tag.Name))
+                    {
+                        <a asp-action="Index" asp-route-tagId="@tag.Id" class="badge text-bg-light border text-decoration-none me-1">#@tag.Name</a>
+                    }
+                }
+            </p>
+            <hr />
+            <p class="text-break" style="white-space: pre-wrap">@Model.Content</p>
+        </div>
+        <div class="card-footer">
+            <a asp-action="Index" class="btn btn-secondary">
+                <i class="bi bi-arrow-left me-1" aria-hidden="true"></i>Quay lại
+            </a>
+            @if (User.IsInRole(RoleNames.Admin) ||
+                 User.IsInRole(RoleNames.Editor) ||
+                 User.IsInRole(RoleNames.User))
+            {
+                <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-primary">
+                    <i class="bi bi-pencil-square me-1" aria-hidden="true"></i>Chỉnh sửa
+                </a>
+            }
+        </div>
+    </div>
+</div>

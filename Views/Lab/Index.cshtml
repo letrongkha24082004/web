@@ -1,15 +1,21 @@
-﻿@model List<BlogManager.Models.Post>
+@model List<Post>
 
 <h2>Danh sách bài viết</h2>
 
 <p>Số đã xuất bản: @ViewBag.SoDaXuatBan</p>
+<p>Tổng lượt xem: @ViewBag.TongLuotXem</p>
+<p>Bài viết nhiều lượt xem nhất: <strong>@ViewBag.BaiVietNhieuLuotXemNhat.Title</strong> (@ViewBag.BaiVietNhieuLuotXemNhat.ViewCount lượt)</p>
+<p>Tác giả: @string.Join(", ", ViewBag.TacGia)</p>
 
 <ul>
-@foreach (var p in Model)
+@foreach (var post in Model)
 {
     <li>
-        <strong>@p.Title</strong> — @p.PublishedAt.ToString("dd/MM/yyyy")
-        <div>@p.Content</div>
+        <strong>@post.Title</strong> — @post.PublishedAt.ToString("dd/MM/yyyy")
+        <span class="badge @(post.ViewCount >= 100 ? "text-bg-success" : "text-bg-secondary")">
+            @post.GetPopularityLabel()
+        </span>
+        <div>@post.Author · @post.ViewCount lượt xem</div>
     </li>
 }
 </ul>
