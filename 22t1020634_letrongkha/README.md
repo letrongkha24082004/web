@@ -18,6 +18,21 @@ SQLite và ASP.NET Core Identity.
 - REST API sản phẩm và Swagger tại `/swagger`.
 - Toàn bộ khu vực `/Admin` chỉ dành cho vai trò `Admin`.
 
+## Cấu trúc
+
+```text
+Areas/Admin/        # Controller, view và layout riêng của quản trị
+Areas/Identity/     # Trang đăng nhập và đăng ký
+Controllers/        # Luồng khách hàng, giỏ hàng và đơn hàng
+Controllers/Api/    # REST API sản phẩm
+Data/               # DbContext và dữ liệu mẫu
+Models/             # Entity và ViewModel
+Services/           # Nghiệp vụ giỏ hàng
+Views/              # Razor View của cửa hàng
+wwwroot/css/        # Giao diện cửa hàng và quản trị
+wwwroot/lib/        # Chỉ giữ thư viện minified đang sử dụng
+```
+
 ## Chạy project
 
 Mật khẩu quản trị không được lưu trong mã nguồn. Đặt biến môi trường trước lần

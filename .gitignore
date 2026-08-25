@@ -6,13 +6,13 @@
 # dotenv files
 .env
 
-# Local SQLite database files
-App_Data/*.db
-App_Data/*.db-shm
-App_Data/*.db-wal
-App_Data/keys/
-App_Data/backups/
-!App_Data/.gitkeep
+# Local SQLite databases and Data Protection keys in every project
+**/App_Data/*.db
+**/App_Data/*.db-shm
+**/App_Data/*.db-wal
+**/App_Data/keys/
+**/App_Data/backups/
+!**/App_Data/.gitkeep
 
 # User-specific files
 *.rsuser

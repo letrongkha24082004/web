@@ -1,0 +1,6 @@
+<Solution>
+  <Folder Name="/Projects/">
+    <Project Path="BlogManager/BlogManager.csproj" />
+    <Project Path="22t1020634_letrongkha/ShopManager.csproj" />
+  </Folder>
+</Solution>
