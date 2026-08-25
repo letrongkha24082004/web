@@ -1,0 +1,29 @@
+@model CartViewModel
+@{ ViewData["Title"] = "Giỏ hàng"; }
+<section class="page-section">
+    <div class="container narrow-container">
+        <div class="page-title"><span class="eyebrow">GIỎ HÀNG CỦA BẠN</span><h1>@Model.Count sản phẩm</h1></div>
+        @if (Model.Items.Count == 0)
+        {
+            <div class="empty-state"><div class="empty-icon">○</div><h3>Giỏ hàng đang trống</h3><p>Khám phá những sản phẩm được chọn lọc của KHA Store.</p><a class="btn-primary-store" href="/">Tiếp tục mua sắm →</a></div>
+        }
+        else
+        {
+            <div class="cart-layout">
+                <div class="cart-list">
+                @foreach (var item in Model.Items)
+                {
+                    <article class="cart-item">
+                        <div class="cart-thumb">@if (!string.IsNullOrWhiteSpace(item.ImageUrl)){<img src="@item.ImageUrl" alt="@item.Name" />}</div>
+                        <div class="cart-product"><h3>@item.Name</h3><span>@item.UnitPrice.ToString("N0")₫</span></div>
+                        <form asp-action="Update" method="post" class="quantity-form"><input type="hidden" name="productId" value="@item.ProductId" /><input name="quantity" type="number" min="1" max="@item.Stock" value="@item.Quantity" /><button>Cập nhật</button></form>
+                        <strong>@item.LineTotal.ToString("N0")₫</strong>
+                        <form asp-action="Remove" method="post"><input type="hidden" name="productId" value="@item.ProductId" /><button class="remove-button" title="Xóa">×</button></form>
+                    </article>
+                }
+                </div>
+                <aside class="order-summary"><h3>Tóm tắt đơn hàng</h3><div><span>Tạm tính</span><b>@Model.Total.ToString("N0")₫</b></div><div><span>Vận chuyển</span><b>@(Model.Total >= 799000 ? "Miễn phí" : "30.000₫")</b></div><hr /><div class="summary-total"><span>Tổng cộng</span><b>@((Model.Total + (Model.Total >= 799000 ? 0 : 30000)).ToString("N0"))₫</b></div><a class="btn-primary-store w-100" asp-controller="Orders" asp-action="Checkout">Tiến hành đặt hàng →</a><a class="continue-link" href="/">← Tiếp tục mua sắm</a></aside>
+            </div>
+        }
+    </div>
+</section>

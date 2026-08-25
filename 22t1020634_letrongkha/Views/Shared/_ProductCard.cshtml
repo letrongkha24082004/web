@@ -1,0 +1,26 @@
+@model Product
+<article class="product-card">
+    <a class="product-image" asp-area="" asp-controller="Products" asp-action="Details" asp-route-id="@Model.Id">
+        @if (Model.IsFeatured) { <span class="product-badge">Nổi bật</span> }
+        @if (!string.IsNullOrWhiteSpace(Model.ImageUrl))
+        {
+            <img src="@Model.ImageUrl" alt="@Model.Name" loading="lazy" />
+        }
+        else
+        {
+            <div class="image-placeholder">KHA</div>
+        }
+    </a>
+    <div class="product-info">
+        <div class="product-category">@Model.Category?.Name</div>
+        <h3><a asp-area="" asp-controller="Products" asp-action="Details" asp-route-id="@Model.Id">@Model.Name</a></h3>
+        <div class="product-meta">
+            <strong>@Model.Price.ToString("N0")₫</strong>
+            <form asp-area="" asp-controller="Cart" asp-action="Add" method="post">
+                <input type="hidden" name="productId" value="@Model.Id" />
+                <input type="hidden" name="returnUrl" value="@Context.Request.Path@Context.Request.QueryString" />
+                <button type="submit" class="add-button" disabled="@(Model.Stock == 0)">@(Model.Stock > 0 ? "+ Thêm" : "Hết hàng")</button>
+            </form>
+        </div>
+    </div>
+</article>

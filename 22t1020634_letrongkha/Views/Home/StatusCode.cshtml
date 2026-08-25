@@ -1,0 +1,17 @@
+@model int
+@{
+    ViewData["Title"] = Model == 404 ? "Không tìm thấy trang" : "Không thể hiển thị trang";
+}
+
+<section class="page-section">
+    <div class="container">
+        <div class="error-box">
+            <span class="error-code">LỖI @Model</span>
+            <h1>@(Model == 404 ? "Không tìm thấy trang" : "Trang chưa thể hiển thị")</h1>
+            <p>@(Model == 404
+                ? "Địa chỉ này không tồn tại hoặc nội dung đã được di chuyển."
+                : "Yêu cầu chưa thể hoàn tất. Vui lòng thử lại sau.")</p>
+            <a class="btn-primary-store" asp-area="" asp-controller="Home" asp-action="Index">Về cửa hàng →</a>
+        </div>
+    </div>
+</section>

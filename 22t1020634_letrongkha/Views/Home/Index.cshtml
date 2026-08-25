@@ -1,0 +1,49 @@
+@model StoreIndexViewModel
+@{
+    ViewData["Title"] = "Mua sắm có chọn lọc";
+}
+
+<section class="hero-section">
+    <div class="container hero-grid">
+        <div class="hero-copy">
+            <span class="eyebrow">BỘ SƯU TẬP 2026</span>
+            <h1>Ít hơn.<br /><em>Tốt hơn.</em></h1>
+            <p>Những sản phẩm được chọn kỹ cho công việc, phong cách và không gian sống của bạn.</p>
+            <a class="btn-primary-store" href="#products">Khám phá ngay <span>→</span></a>
+        </div>
+        <div class="hero-visual">
+            <div class="hero-orbit orbit-one"></div><div class="hero-orbit orbit-two"></div>
+            <div class="hero-number">08</div>
+            <div class="hero-label">SẢN PHẨM<br />CHỌN LỌC</div>
+        </div>
+    </div>
+</section>
+
+<section class="benefit-strip">
+    <div class="container"><div><b>01</b><span>Giao hàng toàn quốc<small>Nhanh chóng & an toàn</small></span></div><div><b>02</b><span>Đổi trả 7 ngày<small>Mua sắm không lo lắng</small></span></div><div><b>03</b><span>Thanh toán khi nhận<small>Đơn giản & tiện lợi</small></span></div></div>
+</section>
+
+<section class="catalog-section" id="products">
+    <div class="container">
+        <div class="section-heading"><div><span class="eyebrow">DANH MỤC SẢN PHẨM</span><h2>Tìm món đồ dành cho bạn</h2></div><span>@Model.Products.Count sản phẩm trên trang này</span></div>
+        <form class="filter-bar" method="get">
+            <div class="search-field"><input name="search" value="@Model.Search" placeholder="Tìm kiếm sản phẩm..." /><button type="submit">Tìm</button></div>
+            <select name="categoryId" onchange="this.form.submit()"><option value="">Tất cả danh mục</option>@foreach (var category in Model.Categories){<option value="@category.Id" selected="@(Model.CategoryId == category.Id)">@category.Name</option>}</select>
+            <select name="sort" onchange="this.form.submit()"><option value="newest" selected="@(Model.Sort == "newest")">Mới & nổi bật</option><option value="price-asc" selected="@(Model.Sort == "price-asc")">Giá thấp đến cao</option><option value="price-desc" selected="@(Model.Sort == "price-desc")">Giá cao đến thấp</option><option value="name" selected="@(Model.Sort == "name")">Tên A–Z</option></select>
+        </form>
+
+        @if (Model.Products.Count == 0)
+        {
+            <div class="empty-state"><h3>Không tìm thấy sản phẩm</h3><p>Hãy thử từ khóa hoặc danh mục khác.</p><a href="/">Xóa bộ lọc</a></div>
+        }
+        else
+        {
+            <div class="product-grid">@foreach (var product in Model.Products){<partial name="_ProductCard" model="product" />}</div>
+        }
+
+        @if (Model.TotalPages > 1)
+        {
+            <nav class="pagination-store">@for (var i = 1; i <= Model.TotalPages; i++){<a class="@(i == Model.Page ? "active" : "")" asp-action="Index" asp-route-page="@i" asp-route-search="@Model.Search" asp-route-categoryId="@Model.CategoryId" asp-route-sort="@Model.Sort">@i</a>}</nav>
+        }
+    </div>
+</section>

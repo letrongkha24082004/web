@@ -1,0 +1,19 @@
+@model CheckoutViewModel
+@{ ViewData["Title"] = "Thanh toán"; }
+<section class="page-section">
+    <div class="container narrow-container">
+        <div class="page-title"><span class="eyebrow">HOÀN TẤT ĐƠN HÀNG</span><h1>Thông tin giao hàng</h1></div>
+        <form asp-action="Checkout" method="post" class="checkout-grid">
+            <div class="checkout-form card-panel">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="form-floating mb-3"><input asp-for="FullName" class="form-control" placeholder="Họ và tên" /><label asp-for="FullName"></label><span asp-validation-for="FullName" class="text-danger"></span></div>
+                <div class="form-floating mb-3"><input asp-for="Phone" class="form-control" placeholder="Số điện thoại" /><label asp-for="Phone"></label><span asp-validation-for="Phone" class="text-danger"></span></div>
+                <div class="form-floating mb-3"><input asp-for="Address" class="form-control" placeholder="Địa chỉ" /><label asp-for="Address"></label><span asp-validation-for="Address" class="text-danger"></span></div>
+                <div class="form-floating"><textarea asp-for="Note" class="form-control note-field" placeholder="Ghi chú"></textarea><label asp-for="Note"></label><span asp-validation-for="Note" class="text-danger"></span></div>
+                <div class="payment-note"><b>Thanh toán khi nhận hàng (COD)</b><span>Bạn chỉ thanh toán sau khi đã nhận và kiểm tra sản phẩm.</span></div>
+            </div>
+            <aside class="order-summary"><h3>Đơn hàng</h3>@foreach (var item in Model.Cart.Items){<div><span>@item.Name × @item.Quantity</span><b>@item.LineTotal.ToString("N0")₫</b></div>}<div><span>Vận chuyển</span><b>@(Model.Cart.Total >= 799000 ? "Miễn phí" : "30.000₫")</b></div><hr /><div class="summary-total"><span>Tổng cộng</span><b>@((Model.Cart.Total + (Model.Cart.Total >= 799000 ? 0 : 30000)).ToString("N0"))₫</b></div><button class="btn-primary-store w-100" type="submit">Xác nhận đặt hàng →</button></aside>
+        </form>
+    </div>
+</section>
+@section Scripts { <partial name="_ValidationScriptsPartial" /> }

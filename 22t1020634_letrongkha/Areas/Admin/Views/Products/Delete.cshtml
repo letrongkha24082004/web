@@ -1,0 +1,3 @@
+@model Product
+@{ ViewData["Title"] = "Xóa sản phẩm"; }
+<section class="admin-section"><div class="container form-container"><div class="danger-panel"><span class="eyebrow">XÁC NHẬN XÓA</span><h1>@Model.Name</h1><p>Sản phẩm đã phát sinh đơn hàng sẽ được chuyển sang ngừng bán để giữ lịch sử dữ liệu.</p><dl><dt>Danh mục</dt><dd>@Model.Category?.Name</dd><dt>Giá bán</dt><dd>@Model.Price.ToString("N0")₫</dd><dt>Tồn kho</dt><dd>@Model.Stock</dd></dl><form method="post"><input type="hidden" name="id" value="@Model.Id" /><a class="btn-outline-store" asp-action="Index">Hủy</a><button class="btn-danger-store">Xác nhận</button></form></div></div></section>

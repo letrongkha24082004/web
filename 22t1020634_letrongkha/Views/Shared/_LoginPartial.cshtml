@@ -1,0 +1,23 @@
+@using Microsoft.AspNetCore.Identity
+@inject SignInManager<IdentityUser> SignInManager
+
+@if (SignInManager.IsSignedIn(User))
+{
+    <div class="dropdown">
+        <button class="account-link dropdown-toggle" data-bs-toggle="dropdown">@User.Identity?.Name</button>
+        <ul class="dropdown-menu dropdown-menu-end">
+            <li><a class="dropdown-item" asp-area="" asp-controller="Orders" asp-action="MyOrders">Đơn hàng của tôi</a></li>
+            <li><a class="dropdown-item" asp-area="Identity" asp-page="/Account/Manage/Index">Tài khoản</a></li>
+            <li><hr class="dropdown-divider" /></li>
+            <li>
+                <form asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="/" method="post">
+                    <button class="dropdown-item" type="submit">Đăng xuất</button>
+                </form>
+            </li>
+        </ul>
+    </div>
+}
+else
+{
+    <a class="account-link" asp-area="Identity" asp-page="/Account/Login">Đăng nhập</a>
+}

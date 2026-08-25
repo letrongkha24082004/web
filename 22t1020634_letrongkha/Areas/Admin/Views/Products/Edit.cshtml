@@ -1,0 +1,4 @@
+@model Product
+@{ ViewData["Title"] = "Sửa sản phẩm"; }
+<section class="admin-section"><div class="container form-container"><a class="back-link" asp-action="Index">← Quay lại sản phẩm</a><div class="page-title"><span class="eyebrow">CHỈNH SỬA</span><h1>@Model.Name</h1></div><form method="post" class="admin-panel form-panel"><input asp-for="Id" type="hidden" /><partial name="_Form" model="Model" /><div class="form-actions"><a class="btn-outline-store" asp-action="Index">Hủy</a><button class="btn-primary-store">Lưu thay đổi</button></div></form></div></section>
+@section Scripts { <partial name="_ValidationScriptsPartial" /> }

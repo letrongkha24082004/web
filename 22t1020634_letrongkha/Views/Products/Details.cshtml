@@ -1,0 +1,26 @@
+@model Product
+@{
+    ViewData["Title"] = Model.Name;
+}
+<section class="detail-section">
+    <div class="container">
+        <nav class="breadcrumb-store"><a href="/">Cửa hàng</a><span>/</span><a asp-controller="Home" asp-action="Index" asp-route-categoryId="@Model.CategoryId">@Model.Category?.Name</a><span>/</span><b>@Model.Name</b></nav>
+        <div class="detail-grid">
+            <div class="detail-image">@if (!string.IsNullOrWhiteSpace(Model.ImageUrl)){<img src="@Model.ImageUrl" alt="@Model.Name" />}else{<div class="image-placeholder">KHA</div>}</div>
+            <div class="detail-copy">
+                <span class="eyebrow">@Model.Category?.Name</span>
+                <h1>@Model.Name</h1>
+                <div class="detail-price">@Model.Price.ToString("N0")₫</div>
+                <p>@Model.Description</p>
+                <div class="stock-state @(Model.Stock > 0 ? "in-stock" : "out-stock")">@(Model.Stock > 0 ? $"Còn {Model.Stock} sản phẩm" : "Tạm hết hàng")</div>
+                <form class="buy-form" asp-controller="Cart" asp-action="Add" method="post">
+                    <input type="hidden" name="productId" value="@Model.Id" />
+                    <input type="hidden" name="returnUrl" value="/Cart" />
+                    <div><label for="quantity">Số lượng</label><input id="quantity" name="quantity" type="number" min="1" max="@Model.Stock" value="1" /></div>
+                    <button class="btn-primary-store" type="submit" disabled="@(Model.Stock == 0)">Thêm vào giỏ hàng <span>→</span></button>
+                </form>
+                <div class="detail-notes"><span>✓ Kiểm tra hàng trước khi nhận</span><span>✓ Hỗ trợ đổi trả trong 7 ngày</span><span>✓ Thanh toán khi nhận hàng</span></div>
+            </div>
+        </div>
+    </div>
+</section>

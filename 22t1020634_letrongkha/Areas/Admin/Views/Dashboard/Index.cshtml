@@ -1,0 +1,88 @@
+@model DashboardViewModel
+@{ ViewData["Title"] = "Bảng điều khiển"; }
+
+<section class="admin-section">
+    <div class="container">
+        <div class="admin-heading">
+            <div>
+                <span class="eyebrow">TỔNG QUAN VẬN HÀNH</span>
+                <h1>Xin chào, Admin</h1>
+                <p>Nắm nhanh tình hình kinh doanh và xử lý công việc quan trọng.</p>
+            </div>
+            <a class="btn-primary-store" asp-controller="Products" asp-action="Create">+ Thêm sản phẩm</a>
+        </div>
+
+        <div class="stat-grid">
+            <article>
+                <span>Đơn hàng hôm nay</span>
+                <strong>@Model.TodayOrderCount</strong>
+                <a asp-controller="Orders">Xem danh sách →</a>
+            </article>
+            <article>
+                <span>Đang chờ xác nhận</span>
+                <strong>@Model.PendingOrderCount</strong>
+                <a asp-controller="Orders" asp-route-status="Pending">Xử lý ngay →</a>
+            </article>
+            <article>
+                <span>Sản phẩm đang quản lý</span>
+                <strong>@Model.ProductCount</strong>
+                <small>@Model.LowStockCount sản phẩm sắp hết hàng</small>
+            </article>
+            <article class="stat-dark">
+                <span>Doanh thu hoàn tất</span>
+                <strong>@Model.Revenue.ToString("N0")₫</strong>
+                <small>Từ @Model.OrderCount đơn hàng toàn hệ thống</small>
+            </article>
+        </div>
+
+        <div class="dashboard-grid">
+            <div class="admin-panel">
+                <div class="panel-heading">
+                    <div><h2>Đơn hàng gần đây</h2><small>Cập nhật theo thời gian thực</small></div>
+                    <a asp-controller="Orders">Xem tất cả →</a>
+                </div>
+                <div class="table-responsive">
+                    <table class="admin-table">
+                        <thead><tr><th>Mã đơn</th><th>Khách hàng</th><th>Ngày đặt</th><th>Trạng thái</th><th class="text-end">Tổng tiền</th></tr></thead>
+                        <tbody>
+                        @if (Model.RecentOrders.Count == 0)
+                        {
+                            <tr><td colspan="5" class="admin-empty-row">Chưa có đơn hàng nào.</td></tr>
+                        }
+                        else
+                        {
+                            @foreach (var order in Model.RecentOrders)
+                            {
+                                <tr>
+                                    <td><a asp-controller="Orders" asp-action="Details" asp-route-id="@order.Id"><b>@order.OrderCode</b></a></td>
+                                    <td>@order.FullName<br /><small>@order.CustomerEmail</small></td>
+                                    <td>@order.CreatedAt.ToLocalTime().ToString("dd/MM/yyyy HH:mm")</td>
+                                    <td><span class="status-pill status-@order.Status.ToString().ToLower()">@order.Status.ToDisplayName()</span></td>
+                                    <td class="text-end"><b>@order.Total.ToString("N0")₫</b></td>
+                                </tr>
+                            }
+                        }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <aside class="dashboard-side">
+                <div class="admin-panel quick-panel">
+                    <div class="panel-heading"><div><h2>Thao tác nhanh</h2><small>Công việc thường dùng</small></div></div>
+                    <div class="quick-actions">
+                        <a asp-controller="Products" asp-action="Create"><span>+</span><div><b>Thêm sản phẩm</b><small>Tạo sản phẩm mới</small></div><i>→</i></a>
+                        <a asp-controller="Categories" asp-action="Create"><span>+</span><div><b>Thêm danh mục</b><small>Tổ chức kho hàng</small></div><i>→</i></a>
+                        <a asp-controller="Orders"><span>!</span><div><b>Xử lý đơn hàng</b><small>@Model.PendingOrderCount đơn đang chờ</small></div><i>→</i></a>
+                    </div>
+                </div>
+                <div class="admin-panel health-panel">
+                    <div class="panel-heading"><div><h2>Tình trạng hệ thống</h2><small>Dữ liệu cửa hàng</small></div></div>
+                    <div class="health-row"><span><i class="health-dot good"></i>Cơ sở dữ liệu</span><b>Ổn định</b></div>
+                    <div class="health-row"><span><i class="health-dot good"></i>Danh mục</span><b>@Model.CategoryCount</b></div>
+                    <div class="health-row"><span><i class="health-dot @(Model.LowStockCount > 0 ? "warn" : "good")"></i>Cảnh báo tồn kho</span><b>@Model.LowStockCount</b></div>
+                </div>
+            </aside>
+        </div>
+    </div>
+</section>

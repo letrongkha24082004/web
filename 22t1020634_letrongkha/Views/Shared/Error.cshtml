@@ -1,0 +1,19 @@
+﻿@model ErrorViewModel
+@{
+    ViewData["Title"] = "Có lỗi xảy ra";
+}
+
+<section class="page-section">
+    <div class="container">
+        <div class="error-box">
+            <span class="error-code">ĐÃ XẢY RA SỰ CỐ</span>
+            <h1>Trang chưa thể hiển thị</h1>
+            <p>Vui lòng thử lại sau ít phút hoặc quay về cửa hàng để tiếp tục mua sắm.</p>
+            <a class="btn-primary-store" asp-area="" asp-controller="Home" asp-action="Index">Về cửa hàng →</a>
+            @if (Model.ShowRequestId)
+            {
+                <p class="request-id">Mã yêu cầu: <code>@Model.RequestId</code></p>
+            }
+        </div>
+    </div>
+</section>
