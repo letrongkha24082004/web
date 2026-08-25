@@ -45,14 +45,12 @@
             <a asp-action="Index" class="btn btn-secondary">
                 <i class="bi bi-arrow-left me-1" aria-hidden="true"></i>Quay lại
             </a>
-            @if (User.IsInRole(RoleNames.Admin) ||
-                 User.IsInRole(RoleNames.Editor) ||
-                 User.IsInRole(RoleNames.User))
-            {
-                <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-primary">
-                    <i class="bi bi-pencil-square me-1" aria-hidden="true"></i>Chỉnh sửa
-                </a>
-            }
+            <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-primary">
+                <i class="bi bi-pencil-square me-1" aria-hidden="true"></i>Chỉnh sửa
+            </a>
+            <a asp-action="Delete" asp-route-id="@Model.Id" class="btn btn-outline-danger">
+                <i class="bi bi-trash me-1" aria-hidden="true"></i>Xóa
+            </a>
         </div>
     </div>
 </div>

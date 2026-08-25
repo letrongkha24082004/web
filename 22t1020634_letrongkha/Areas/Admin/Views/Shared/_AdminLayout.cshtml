@@ -16,7 +16,14 @@
 <body class="admin-body">
     <input class="admin-nav-toggle" type="checkbox" id="adminNavToggle" />
     <aside class="admin-sidebar">
-        <div class="admin-brand"><span class="admin-brand-mark">K</span><span>KHA <b>ADMIN</b><small>ECOMMERCE SYSTEM</small></span></div>
+        <div class="admin-brand">
+            <span class="admin-brand-mark">K</span>
+            <span><b>KHA STORE</b><small>TRANG QUẢN TRỊ</small></span>
+        </div>
+        <div class="admin-course-label">
+            <span>Lập trình Web</span>
+            <small>Bài tập lớn · ASP.NET Core MVC</small>
+        </div>
         <nav class="admin-nav">
             <span class="admin-nav-label">Tổng quan</span>
             <a class="@Active("Dashboard")" asp-area="Admin" asp-controller="Dashboard" asp-action="Index"><span class="nav-symbol">01</span><span>Bảng điều khiển</span></a>
@@ -40,7 +47,7 @@
         <header class="admin-topbar">
             <div class="admin-topbar-left">
                 <label class="admin-menu-button" for="adminNavToggle">☰</label>
-                <div><small>KHA STORE / @controller.ToUpperInvariant()</small><strong>@ViewData["Title"]</strong></div>
+                <div><small>LẬP TRÌNH WEB / KHA STORE / @controller.ToUpperInvariant()</small><strong>@ViewData["Title"]</strong></div>
             </div>
             <div class="admin-topbar-actions">
                 <span class="admin-date">@DateTime.Now.ToString("dd/MM/yyyy")</span>
@@ -58,7 +65,7 @@
             }
             @RenderBody()
         </main>
-        <footer class="admin-footer"><span>KHA Store Administration</span><span>22T1020634 · Lê Trọng Kha</span></footer>
+        <footer class="admin-footer"><span>Đồ án KHA Store · ASP.NET Core MVC</span><span>22T1020634 · Lê Trọng Kha</span></footer>
     </div>
 
     <script src="~/lib/jquery/dist/jquery.min.js"></script>

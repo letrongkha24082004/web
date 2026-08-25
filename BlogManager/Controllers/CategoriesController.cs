@@ -33,14 +33,14 @@ public class CategoriesController(ICategoryService categoryService) : Controller
         });
     }
 
-    [Authorize(Roles = RoleNames.Admin)]
+    [Authorize(Roles = RoleNames.CanEditPosts)]
     public IActionResult Create()
     {
         return View(new Category());
     }
 
     [HttpPost]
-    [Authorize(Roles = RoleNames.Admin)]
+    [Authorize(Roles = RoleNames.CanEditPosts)]
     [ValidateAntiForgeryToken]
     public async Task<IActionResult> Create(
         Category category,
@@ -63,7 +63,7 @@ public class CategoriesController(ICategoryService categoryService) : Controller
         return RedirectToAction(nameof(Index));
     }
 
-    [Authorize(Roles = RoleNames.Admin)]
+    [Authorize(Roles = RoleNames.CanEditPosts)]
     public async Task<IActionResult> Edit(int id, CancellationToken cancellationToken)
     {
         var category = await categoryService.GetByIdAsync(id, cancellationToken);
@@ -71,7 +71,7 @@ public class CategoriesController(ICategoryService categoryService) : Controller
     }
 
     [HttpPost]
-    [Authorize(Roles = RoleNames.Admin)]
+    [Authorize(Roles = RoleNames.CanEditPosts)]
     [ValidateAntiForgeryToken]
     public async Task<IActionResult> Edit(
         int id,
@@ -105,7 +105,7 @@ public class CategoriesController(ICategoryService categoryService) : Controller
         return RedirectToAction(nameof(Index));
     }
 
-    [Authorize(Roles = RoleNames.Admin)]
+    [Authorize(Roles = RoleNames.CanEditPosts)]
     public async Task<IActionResult> Delete(int id, CancellationToken cancellationToken)
     {
         var category = await categoryService.GetByIdAsync(id, cancellationToken);
@@ -113,7 +113,7 @@ public class CategoriesController(ICategoryService categoryService) : Controller
     }
 
     [HttpPost, ActionName("Delete")]
-    [Authorize(Roles = RoleNames.Admin)]
+    [Authorize(Roles = RoleNames.CanEditPosts)]
     [ValidateAntiForgeryToken]
     public async Task<IActionResult> DeleteConfirmed(
         int id,

@@ -30,8 +30,9 @@ dotnet run --project BlogManager/BlogManager.csproj
 | --- | ---: | ---: | ---: | ---: |
 | Xem nội dung | Có | Có | Có | Có |
 | Tạo và sửa bài viết | Không | Có | Có | Có |
-| Xóa bài viết | Không | Không | Không | Có |
-| Quản lý danh mục và thẻ | Không | Không | Không | Có |
+| Xóa bài viết trên website | Không | Có | Có | Có |
+| Quản lý danh mục | Không | Có | Có | Có |
+| Quản lý thẻ | Không | Không | Không | Có |
 
 ## API
 

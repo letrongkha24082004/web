@@ -145,7 +145,7 @@ public class PostsController(
         return RedirectToAction(nameof(Index));
     }
 
-    [Authorize(Roles = RoleNames.Admin)]
+    [Authorize(Roles = RoleNames.CanEditPosts)]
     public async Task<IActionResult> Delete(int id, CancellationToken cancellationToken)
     {
         var post = await postService.GetByIdAsync(id, cancellationToken);
@@ -153,7 +153,7 @@ public class PostsController(
     }
 
     [HttpPost, ActionName("Delete")]
-    [Authorize(Roles = RoleNames.Admin)]
+    [Authorize(Roles = RoleNames.CanEditPosts)]
     [ValidateAntiForgeryToken]
     public async Task<IActionResult> DeleteConfirmed(
         int id,
